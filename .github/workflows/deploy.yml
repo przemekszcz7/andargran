@@ -31,9 +31,7 @@ jobs:
       - name: Konfiguracja Node.js
         uses: actions/setup-node@v4
         with:
-          node-size: 'large'
           node-version: 20
-          cache: 'npm'
 
       - name: Instalacja zależności
         run: npm install
