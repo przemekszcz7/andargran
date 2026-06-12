@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+@theme {
+  --color-stone-dark: #0f0d0b;
+  --color-stone-brown-dark: #2e1f14;
+  --color-stone-brown-mid: #4a3728;
+  --color-stone-gray: #9e9890;
+  --color-stone-beige: #f5f0e8;
+  --color-stone-beige-mid: #ede5d5;
+  --color-stone-beige-dark: #d4c9b5;
+  --color-stone-gold: #c9a96e;
+  --color-stone-gold-light: #e0c896;
+  --color-stone-white: #faf8f4;
+  
+  --font-cinzel: "Cinzel", serif;
+  --font-lora: "Lora", serif;
+}
+
+/* Custom fine-line stonecutter cross cursor */
+html, body {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cline x1='8' y1='3' x2='8' y2='13' stroke='%23c9a96e' stroke-width='1' stroke-linecap='square'/%3E%3Cline x1='3' y1='8' x2='13' y2='8' stroke='%23c9a96e' stroke-width='1' stroke-linecap='square'/%3E%3C/svg%3E") 8 8, crosshair;
+  scroll-behavior: smooth;
+  background-color: #f5f0e8;
+  color: #2e1f14;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Base link / button hover transition resets */
+a, button {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Subtly grain/noise background to simulate natural granite/marble slab texture */
+.bg-grain {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+}
+
+/* Enhanced version for dark sections to give more depth and raw igneous detail */
+.bg-grain-dark {
+  background-image: 
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+}
+
+/* Smooth fade-in states via IntersectionObserver */
+.reveal-on-scroll {
+  opacity: 0;
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-on-scroll.revealed {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-on-scroll {
+    opacity: 1 !important;
+    transition: none !important;
+  }
+  html, body {
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Custom stylized scrollbar resembling thin basalt cut */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0f0d0b;
+}
+::-webkit-scrollbar-thumb {
+  background: #c9a96e;
+  border: 1px solid #0f0d0b;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #e0c896;
+}
+
+/* Custom keyframe animations for elegant entrance */
+@keyframes lineGrow {
+  from { width: 0%; opacity: 0; }
+  to { width: 100%; opacity: 1; }
+}
+
+.animate-line-grow {
+  animation: lineGrow 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes floatDust {
+  0% { transform: translateY(0px) translateX(0px); opacity: 0; }
+  50% { opacity: 0.4; }
+  100% { transform: translateY(-40px) translateX(15px); opacity: 0; }
+}
+
+.stone-dust-particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background-color: #c9a96e;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: floatDust 8s ease-in-out infinite;
+}
